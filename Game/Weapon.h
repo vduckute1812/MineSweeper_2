@@ -2,10 +2,10 @@
 
 enum WeaponType
 {
-	PISTAL_WEAP,
-	RIFLE_WEAP,
-	GRENADE_WEAP,
-	NONE_WEAP
+	WEAP_PISTAL,
+	WEAP_RIFLE,
+	WEAP_GRENADE,
+	WEAP_NONE
 };
 
 class Weapon
@@ -14,11 +14,18 @@ public:
 	explicit Weapon();
 	virtual ~Weapon();
 
-	WeaponType GetType() const;
+	virtual void Use() = 0;
+
+	WeaponType	GetType() const;
+	int			GetNumAvailable() const;
+	
+
+	bool		IsAvailable() const;
 
 protected:
 	WeaponType	m_type;
 	int			m_numVal;
 	int			m_bulletSpeed;
+	bool		m_isAvailable;
 };
 

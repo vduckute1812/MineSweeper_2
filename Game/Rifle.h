@@ -4,6 +4,8 @@ class Rifle: public Weapon
 {
 public:
 	explicit Rifle();
-	virtual ~Rifle();
+	~Rifle();
+
+	virtual void Use();
 };
 

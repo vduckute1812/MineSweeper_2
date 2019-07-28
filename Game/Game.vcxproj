@@ -148,9 +148,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Armory.h" />
     <ClInclude Include="AuxiliaryItem.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Bush.h" />
+    <ClInclude Include="CircleObject.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="FirstAidBox.h" />
@@ -158,18 +160,22 @@
     <ClInclude Include="Helmet.h" />
     <ClInclude Include="MainState.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Mine.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pistal.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RetangleObject.h" />
     <ClInclude Include="Rifle.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="Untils.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Armory.cpp" />
     <ClCompile Include="AuxiliaryItem.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Bush.cpp" />
+    <ClCompile Include="CircleObject.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="FirstAidBox.cpp" />
     <ClCompile Include="Grenade.cpp" />
@@ -177,10 +183,11 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainState.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Mine.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Pistal.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="RetangleObject.cpp" />
     <ClCompile Include="Rifle.cpp" />
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Weapon.cpp" />

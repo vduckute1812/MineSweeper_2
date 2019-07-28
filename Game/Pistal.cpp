@@ -11,3 +11,9 @@ Pistal::Pistal()
 Pistal::~Pistal()
 {
 }
+
+void Pistal::Use()
+{
+	m_numVal--;
+}
+

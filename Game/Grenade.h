@@ -4,6 +4,8 @@ class Grenade: public Weapon
 {
 public:
 	explicit Grenade();
-	virtual ~Grenade();
+	~Grenade();
+
+	virtual void Use();
 };
 

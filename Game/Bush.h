@@ -1,7 +1,7 @@
 #pragma once
-#include "Object.h"
+#include "RetangleObject.h"
 
-class Bush: public Object
+class Bush: public RetangleObject
 {
 public:
 	Bush();

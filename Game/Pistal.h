@@ -4,9 +4,12 @@ class Pistal: public Weapon
 {
 public:
 	explicit Pistal();
-	virtual ~Pistal();
+	~Pistal();
+
+	virtual void	Use();
 
 private:
-	int m_rofSpeed;
+	int		m_rofSpeed;
+	bool	m_isAvailable;
 };
 

@@ -5,7 +5,9 @@
 #include "Grenade.h"
 #include "Helmet.h"
 #include "DebugDraw.h"
-
+#include "Weapon.h"
+#include "Armory.h"
+#include "Define.h"
 
 Player::Player()
 {
@@ -25,9 +27,9 @@ void Player::Init(int id, char* name, Position pos, int characterSpeed, int bloo
 	m_id = id;
 	m_name = name;
 	m_position = pos;
-	m_characterSpeed = characterSpeed;
 	m_blood = blood;
 	m_isDead = false;
+	m_characterSpeed = characterSpeed;
 }
 
 
@@ -87,6 +89,31 @@ bool Player::IsDead() const
 bool Player::IsVisible() const
 {
 	return m_isVisible;
+}
+
+void Player::Move(Position target)
+{
+	//m_position.x = 
+}
+
+Weapon* Player::GetWeapon() const
+{
+	return m_armory->GetCurrentWeapon();
+}
+
+WeaponType Player::GetWeaponType() const
+{
+	return m_armory->GetCurrentWeaponType();
+}
+
+void Player::UseWeapon()
+{
+	m_armory->UseWeapon();
+}
+
+void Player::ChangeWeapon(WeaponType type)
+{
+	m_armory->SetWeapon(type);
 }
 
 void Player::Update()

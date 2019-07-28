@@ -1,6 +1,6 @@
 #pragma once
-#include "Object.h"
-class Rock: public Object
+#include "RetangleObject.h"
+class Rock: public RetangleObject
 {
 public:
 	Rock();

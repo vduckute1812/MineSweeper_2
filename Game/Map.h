@@ -4,19 +4,19 @@
 
 class Map
 {
-	public:
-		Map();
-		Map(int width, int height);
-		~Map();
+public:
+	Map();
+	Map(int width, int height);
+	~Map();
 
-		void	Init();
-		void	SetWidthMap(int width);
-		int		GetWidth();
-		void	SetHeightMap(int height);
-		int		GetHeigh();
+	void	Init();
+	void	SetWidthMap(int width);
+	int		GetWidth();
+	void	SetHeightMap(int height);
+	int		GetHeigh();
 
-	private:
-		int		m_width;
-		int		m_heigh;
+private:
+	int		m_width;
+	int		m_heigh;
 };
 

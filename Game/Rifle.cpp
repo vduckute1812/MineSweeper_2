@@ -9,3 +9,8 @@ Rifle::Rifle()
 Rifle::~Rifle()
 {
 }
+
+void Rifle::Use()
+{
+	m_numVal--;
+}

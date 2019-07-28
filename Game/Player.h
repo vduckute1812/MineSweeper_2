@@ -1,14 +1,25 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 
-#include "Object.h"
+#include "CircleObject.h"
 #include <vector>
 
 using namespace std;
 
+enum Action 
+{
+	MOVE,
+	SHOOT,
+	COLLECT,
+	CHANGE_WEAPON,
+	SET_MINE
+};
+
 class Weapon;
 class Helmet;
 class Armory;
-class Player: public Object
+enum WeaponType;
+class Player: public CircleObject
 {
 public:
 	Player();
@@ -33,6 +44,13 @@ public:
 	bool	IsDead() const;
 	bool	IsVisible() const;
 
+	//Position	
+	void		Move(Position target);
+
+	void		UseWeapon();
+	Weapon*		GetWeapon() const;
+	WeaponType	GetWeaponType() const;
+	void		ChangeWeapon(WeaponType type);
 
 private:
 	int		m_id;
@@ -48,5 +66,10 @@ private:
 
 	// Armory of character
 	Armory*		m_armory;
+
+	Action		m_action;
+	Position	m_currentTarget;
 };
 
+
+#endif

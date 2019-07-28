@@ -11,12 +11,17 @@
 #define CHARACTER_SPEED		30
 #define CHARACTER_BLOOD		100
 
-// The area AI can see or hear enemy...
+// THE AREA AI CAN SEE OR HEAR ENEMY...
 #define VISIBLE_RANGE		3600
 #define LISTENABLE_RANGE	5000
 
-// Map size
+// MAP SIZE
 #define MAP_SIZE			14000
+#define WIDTH				14400
+#define HEIGH				9600
+#define OFFSET_X			100
+#define OFFSET_Y			100
+#define RADIUS_CENTER		1350
 
 // USE RANGE
 #define PISTAL_RANGE		5000
@@ -28,16 +33,14 @@
 #define REFILE_BULLET_SPEED 5000
 #define	GRENADE_SPEED		1500
 
+// MAX VALUE OF BULLET IN ARMORY
+#define PISTAL_MAX_NUM		50		//It's infinity but you just need to show the bullet visible in map
+#define RIFLE_MAX_NUM		30
+#define	GRENADE_MAX_NUM		5
 
 
 
-#define WIDTH 14400
-#define HEIGH 9600
-#define OFFSET_X 100
-#define OFFSET_Y 100
-#define RADIUS_CENTER 1350
-
-#define TIME = 100
+#define TIME				3000	// 3000 turn
 
 #define MAX_FB 5
 

@@ -17,5 +17,6 @@ public:
 	virtual ~Bullet();
 
 protected:
-	BulletType m_type;
+	BulletType	m_type;
+	float		m_directAngle;
 };
