@@ -15,21 +15,11 @@
 #elif defined(_WIN32) || defined(WIN32)
 #include <windows.h>
 #endif
-bool start_game = false;
 
-MainState *m_MainState;
 
-//
-struct UIState
-{
-	bool showMenu;
-};
-
-//
 namespace
 {
 	GLFWwindow* mainWindow = nullptr;
-	UIState ui;
 
 	int32 testIndex = 0;
 	int32 testSelection = 0;
@@ -38,17 +28,6 @@ namespace
 	b2Vec2 lastp;
 }
 
-void init()
-{
-	m_MainState->GetInstance()->init();
-}
-
-void start()
-{
-	start_game = true;
-}
-
-static bool isDisplayGUIGame = true;
 #ifdef CHECK_MODE_FROM_FILE
 void GetGameModeFromConfigFile()
 {
@@ -66,7 +45,6 @@ void GetGameModeFromConfigFile()
 	if (strcmp(output, "Gamemode=NO_GUI") == 0)
 	{
 		GameModeLoadFromConfigFile =  3;
-		isDisplayGUIGame = false;
 	}
 	else if (strcmp(output, "Gamemode=Extra") == 0)
 	{		
@@ -93,8 +71,6 @@ void GetGameModeFromConfigFile()
 #ifdef DEBUG_SERVER
 static void sCreateUI( GLFWwindow* window )
 {
-	ui.showMenu = true;
-
 	// Init UI
 	const char* fontPath = "Data/DroidSans.ttf";
 	ImGui::GetIO().Fonts->AddFontFromFileTTF( fontPath, 15.f );
@@ -114,17 +90,6 @@ static void sCreateUI( GLFWwindow* window )
 }
 #endif // DEBUG_SERVER
 
-void update()
-{
-	m_MainState->GetInstance()->update();
-}
-
-void end()
-{
-	start_game = false;
-
-	m_MainState->Destroy();
-}
 
 void displayMe( void )
 {
@@ -163,49 +128,46 @@ int main(int argc, char* argv[])
 #endif
 
 #ifdef DEBUG_SERVER
-	if (isDisplayGUIGame)
-	{
 
 #if defined(_WIN32)
-		// Enable memory-leak reports
-		_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG));
+	// Enable memory-leak reports
+	_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG));
 #endif
-		glfwSetErrorCallback(glfwErrorCallback);
+	glfwSetErrorCallback(glfwErrorCallback);
 
-		g_camera.m_width  = MAP_SIZE / DRAW_SCALE + 2 * OFFSET_X;
-		g_camera.m_height = MAP_SIZE / DRAW_SCALE + 2 * OFFSET_Y;
+	g_camera.m_width  = MAP_SIZE / DRAW_SCALE + 2 * OFFSET_X;
+	g_camera.m_height = MAP_SIZE / DRAW_SCALE + 2 * OFFSET_Y;
 
-		if (glfwInit() == 0)
-		{
-			fprintf(stderr, "Failed to initialize GLFW\n");
-			return -1;
-		}
+	if (glfwInit() == 0)
+	{
+		fprintf(stderr, "Failed to initialize GLFW\n");
+		return -1;
+	}
 
-		char title[64];
-		sprintf(title, "GameServer");
+	char title[64];
+	sprintf(title, "GameServer");
 
-		mainWindow = glfwCreateWindow(g_camera.m_width, g_camera.m_height, title, nullptr, nullptr);
-		if (mainWindow == nullptr)
-		{
-			fprintf(stderr, "Failed to open GLFW mainWindow.\n");
-			glfwTerminate();
-			return -1;
-		}
+	mainWindow = glfwCreateWindow(g_camera.m_width, g_camera.m_height, title, nullptr, nullptr);
+	if (mainWindow == nullptr)
+	{
+		fprintf(stderr, "Failed to open GLFW mainWindow.\n");
+		glfwTerminate();
+		return -1;
+	}
 
-		glfwMakeContextCurrent(mainWindow);
+	glfwMakeContextCurrent(mainWindow);
 #if defined(__APPLE__) == FALSE
-		//glewExperimental = GL_TRUE;
-		GLenum err = glewInit();
-		if (GLEW_OK != err)
-		{
-			fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-			exit(EXIT_FAILURE);
-		}
+	//glewExperimental = GL_TRUE;
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+		exit(EXIT_FAILURE);
+	}
 #endif
-		g_debugDraw.Create();
-		sCreateUI(mainWindow);
-		double time1 = glfwGetTime();
-	} //isDisplayGUIGame
+	g_debugDraw.Create();
+	sCreateUI(mainWindow);
+	double time1 = glfwGetTime();
 #endif // DEBUG_SERVER
 	double frameTime = 0.0;
 	int gameTurn = 0;
@@ -221,11 +183,8 @@ int main(int argc, char* argv[])
 		isExtraTime = false;
 		cerr << "Extra: " << isExtraTime;
 	//}
-	m_MainState->GetInstance()->ConfigBot("AAAA", "BBBB", 0, 1, pathSave , isExtraTime );
-	m_MainState->GetInstance()->init();
-	start();
+
 #ifdef DEBUG_SERVER
-if (isDisplayGUIGame)
 	glClearColor( 0.3f, 0.3f, 0.3f, 1.f );
 #endif // DEBUG_SERVER
 	/*
@@ -269,84 +228,11 @@ if (isDisplayGUIGame)
 	*/
 	
 	string filename = "";
-	while (start_game)
-	{
-		//printf("Name:%s", argv[1] );
-		#ifdef DEBUG_SERVER
-		if (isDisplayGUIGame)
-		{
-			glfwGetWindowSize(mainWindow, &g_camera.m_width, &g_camera.m_height);
-			int bufferWidth, bufferHeight;
-			glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
-			glViewport(0, 0, bufferWidth, bufferHeight);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			ImGui_ImplGlfwGL3_NewFrame();
-			ImGui::SetNextWindowPos(ImVec2(0, 0));
-			ImGui::SetNextWindowSize(ImVec2((float)g_camera.m_width, (float)g_camera.m_height));
-			ImGui::Begin("Overlay", NULL, ImVec2(0, 0), 0.0f, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoScrollbar);
-			ImGui::SetCursorPos(ImVec2(5, (float)g_camera.m_height - 20));
-			//ImGui::Text( "%.1f ms", 1000.0 * frameTime );
-			ImGui::End();
-		}//isDisplayGUIGame
-#endif // DEBUG_SERVER
-		gameTurn++;
-		m_MainState->GetInstance()->update();
-		if (m_MainState->GetInstance()->IsFinishMatch())
-		{
-			start_game = false;
-		}
-		
-		#ifdef DEBUG_SERVER
-		if (isDisplayGUIGame)
-		{
-			//update();
-			//b2Vec2 center = { -100,100 };
-			//Ball ball = m_MainState->GetBall();
-		
-			/*b2Vec2 center = { 0.0f, 0.0f };
-			b2Vec2 centerW1 = g_camera.ConvertScreenToWorld( center );
-			float32 radius = 2.0f;
-			b2Color color( 0.95f, 0.95f, 0.6f );
-			g_debugDraw.DrawCircle( centerW1, radius, color );*/
-			m_MainState->GetInstance()->Draw();
-			g_debugDraw.Flush();
-			start_game = !m_MainState->GetInstance()->IsFinishMatch();
-			/*if( m_MainState->GetInstance->IsFinishMatch() )
-			{
-				start_game = false;
-			}*/
-			ImGui::Render();
-		
-			glfwSwapBuffers( mainWindow );
 
-			glfwPollEvents();
-		}//isDisplayGUIGame
-		#endif // DEBUG_SERVER
-	}
-	filename = m_MainState->GetInstance()->GetFileName();
-	int result = m_MainState->GetInstance()->GetResult();
-	string out = "'result':";
-	out += std::to_string(result);
-	out += ",";
-	out += "'file'";
-	out += filename;
-	//puts( out.c_str() );
-	#ifdef DEBUG_SERVER
-	if (isDisplayGUIGame)
-	{
-		g_debugDraw.Destroy();
-		ImGui_ImplGlfwGL3_Shutdown();
-		glfwTerminate();
-	}//isDisplayGUIGame
-	#endif // DEBUG_SERVER
-	string clientInput;
-	//std::cin >> clientInput;
-	getline(std::cin, clientInput);
-	
 #ifndef DEBUG_SERVER
 	printf("END{'file':'%s', 'result':%d, 'score':'%s', 'lastTurn':%d}", filename.c_str(), result, m_MainState->GetInstance()->GetResultString().c_str(), gameTurn);
 #else
-	printf("END{'result':%d, 'score':'%s', 'lastTurn':%d}", result, m_MainState->GetInstance()->GetResultString().c_str(), gameTurn);
+	//printf("END{'result':%d, 'score':'%s', 'lastTurn':%d}", result, m_MainState->GetInstance()->GetResultString().c_str(), gameTurn);
 #endif
 
 	int m_time_sleep = 1;
@@ -355,7 +241,7 @@ if (isDisplayGUIGame)
 #elif defined(_WIN32) || defined(WIN32)
 	Sleep(m_time_sleep);
 #endif
-	return result;
+	return 0;
 }
 #ifdef DEBUG_SERVER
 static void sResizeWindow( GLFWwindow*, int width, int height )

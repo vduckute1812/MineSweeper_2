@@ -4,6 +4,7 @@
 
 Grenade::Grenade()
 {
+	m_type = WEAP_GRENADE;
 }
 
 

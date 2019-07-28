@@ -1,8 +1,9 @@
 #pragma once
-class Rifle
+#include "Weapon.h"
+class Rifle: public Weapon
 {
 public:
-	Rifle();
-	~Rifle();
+	explicit Rifle();
+	virtual ~Rifle();
 };
 

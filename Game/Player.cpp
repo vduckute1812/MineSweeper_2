@@ -1,60 +1,99 @@
 #include "Player.h"
+#include "Define.h"
+#include "Pistal.h"
+#include "Rifle.h"
+#include "Grenade.h"
+#include "Helmet.h"
+#include "DebugDraw.h"
 
 
 Player::Player()
 {
-	for (int i = 0; i < MAX_FB; i++)
-	{
-		m_fb[i] = new Football_player();
-	}
-}
+	m_name = new char[100];
 
+	m_isShowVisibleRange = false;
+	m_isShowListanableRange = false;
+}
 
 Player::~Player()
 {
-	for (int i = 0; i < MAX_FB; i++)
-	{
-		delete m_fb[i];
-	}
+	delete []m_name;
 }
 
-void Player::init(int id, int pos[MAX_FB][2])
+void Player::Init(int id, char* name, Position pos, int characterSpeed, int blood)
 {
 	m_id = id;
-	for (int i = 0; i < MAX_FB; i++)
-	{
-		m_fb[i]->init(pos[i][0], pos[i][1]);
-	}
+	m_name = name;
+	m_position = pos;
+	m_characterSpeed = characterSpeed;
+	m_blood = blood;
+	m_isDead = false;
 }
 
-void Player::update()
-{
-	Read_data();
 
-	for (int i = 0; i < MAX_FB; i++)
-	{
-		m_fb[i]->update();
-	}
+void Player::ShowVisibleRange(bool isShowVisible)
+{
+	m_isShowVisibleRange = isShowVisible;
 }
 
-void Player::Read_data()
+void Player::ShowListanableRange(bool isShowListenable)
 {
-	EVENT event[MAX_FB];
+	m_isShowListanableRange = isShowListenable;
+}
 
+bool Player::IsShowVisibleRange() const
+{
+	return m_isShowVisibleRange;
+}
 
-	//read data from control
-	for (int i = 0; i < MAX_FB; i++)
+bool Player::IsShowListenableRange() const
+{
+	return m_isShowListanableRange;
+}
+
+void Player::SetName(char* name)
+{
+	m_name = name;
+}
+
+char* Player::GetName() const
+{
+	return m_name;
+}
+
+int Player::GetNameLength() const
+{
+	int size = 0;
+	char* tmp = m_name;
+
+	while (*tmp != '\0')
 	{
-		//template
-		event[i].m_action = Action::RUN;
-		//event[i].m_pos.x = 10;
-		//event[i].m_pos.y = 20;
-		//event[i].m_direction = 0;
-
+		size++;
+		tmp++;
 	}
+	return size;
+}
 
-	for (int i = 0; i < MAX_FB; i++)
-	{
-		m_fb[i]->push_action(&event[i]);
-	}
+void Player::Killed()
+{
+	m_isDead = true;
+}
+
+bool Player::IsDead() const
+{
+	return m_isDead;
+}
+
+bool Player::IsVisible() const
+{
+	return m_isVisible;
+}
+
+void Player::Update()
+{
+}
+
+void Player::Render()
+{
+
 }

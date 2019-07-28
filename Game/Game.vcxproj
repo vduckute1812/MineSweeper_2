@@ -149,13 +149,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AuxiliaryItem.h" />
-    <ClInclude Include="Ball.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Bush.h" />
-    <ClInclude Include="Cycle.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="FirstAidBox.h" />
-    <ClInclude Include="Football_player.h" />
     <ClInclude Include="Grenade.h" />
     <ClInclude Include="Helmet.h" />
     <ClInclude Include="MainState.h" />
@@ -170,12 +168,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AuxiliaryItem.cpp" />
-    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Bush.cpp" />
-    <ClCompile Include="Cycle.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="FirstAidBox.cpp" />
-    <ClCompile Include="Football_player.cpp" />
     <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="Helmet.cpp" />
     <ClCompile Include="Main.cpp" />

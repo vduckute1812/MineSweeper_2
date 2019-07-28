@@ -1,48 +1,42 @@
 #include "Map.h"
 
-Map *Map::m_instance = nullptr;
-
-Map* Map::GetInstance()
-{
-	if (m_instance == nullptr)
-	{
-		m_instance = new Map();
-	}
-	return m_instance;
-}
-
-void Map::Destroy()
-{
-	if (m_instance)
-	{
-		delete m_instance;
-	}
-}
 
 
 Map::Map()
 {
-	/*if( m_instance == NULL )
-	{
-		m_instance = new Map();
-	}*/
 }
 
-Map::Map( int width, int height )
+Map::Map(int width, int height)
 {
-	m_rec.Init( width, height );
+	m_width = width;
+	m_heigh = height;
 }
-
 
 Map::~Map()
 {
 }
 
+void Map::Init()
+{
+
+}
+
+void Map::SetWidthMap(int width)
+{
+	m_width = width;
+}
+
 int Map::GetWidth()
 {
-	return m_rec.GetWidth();
+	return m_width;
 }
+
+void Map::SetHeightMap(int height)
+{
+	m_heigh = height;
+}
+
 int Map::GetHeigh()
 {
-	return m_rec.GetHeigh();
+	return m_heigh;
 }

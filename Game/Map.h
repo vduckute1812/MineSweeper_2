@@ -1,24 +1,22 @@
 #pragma once
 
-#include <vector>
 #include "Define.h"
-#include "Rectangle.h"
-#include "Cycle.h"
 
 class Map
 {
-public:
-	static Map *GetInstance();
-	static void Destroy();
-	Map();
-	Map(int width, int height);
-	~Map();
-	int GetWidth();
-	int GetHeigh();
-private:
-	static Map *m_instance;
+	public:
+		Map();
+		Map(int width, int height);
+		~Map();
 
-	Rectangle m_rec;
-	Cycle m_cycle;
+		void	Init();
+		void	SetWidthMap(int width);
+		int		GetWidth();
+		void	SetHeightMap(int height);
+		int		GetHeigh();
+
+	private:
+		int		m_width;
+		int		m_heigh;
 };
 

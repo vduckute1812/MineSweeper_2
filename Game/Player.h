@@ -1,24 +1,52 @@
 #pragma once
 
-#include "Football_player.h"
-#include "Define.h"
-#include "Ball.h"
+#include "Object.h"
+#include <vector>
 
 using namespace std;
 
-class Player
+class Weapon;
+class Helmet;
+class Armory;
+class Player: public Object
 {
 public:
 	Player();
 	~Player();
 
-	void init(int id, int pos[MAX_FB][2]); 
-	void update();
+	void	Init(int id, char* name,Position pos, int characterSpeed, int blood);
+	void	Update();
 
-	void Read_data();
+	void	Render();
+	void	ShowVisibleRange(bool);
+	void	ShowListanableRange(bool);
+
+	bool	IsShowVisibleRange() const;
+	bool	IsShowListenableRange() const;
+
+	void	SetName(char* name);
+	char*	GetName() const;
+	int		GetNameLength() const;
+	
+	void	Killed();
+
+	bool	IsDead() const;
+	bool	IsVisible() const;
+
 
 private:
-	int m_id;
-	Football_player *m_fb[MAX_FB];
+	int		m_id;
+	char*	m_name;
+	int		m_blood;
+	int		m_characterSpeed;
+
+	bool	m_isDead;
+	bool	m_isVisible;	// Hide on bush
+
+	bool	m_isShowVisibleRange;
+	bool	m_isShowListanableRange;
+
+	// Armory of character
+	Armory*		m_armory;
 };
 

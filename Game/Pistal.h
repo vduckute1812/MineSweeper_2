@@ -1,8 +1,12 @@
 #pragma once
-class Pistal
+#include "Weapon.h"
+class Pistal: public Weapon
 {
 public:
-	Pistal();
-	~Pistal();
+	explicit Pistal();
+	virtual ~Pistal();
+
+private:
+	int m_rofSpeed;
 };
 

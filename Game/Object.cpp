@@ -4,49 +4,67 @@
 
 Object::Object()
 {
-	cycle = new Cycle();
+
 }
 
+Object::Object(Object *obj)
+{
+	m_type = obj->m_type;
+	m_position = obj->m_position;
+	m_size = obj->m_size;
+}
+
+Object::Object(int x, int y, Type type)
+{
+	m_type = type;
+	m_position.x = x;
+	m_position.y = y;
+}
 
 Object::~Object()
 {
-	delete cycle;
-}
-
-void Object::init(int x, int y)
-{
 
 }
 
-void Object::update()
+void Object::Init(int x, int y, Type type)
 {
+	m_position.x = x;
+	m_position.y = y;
 
+	m_type = type;
 }
 
-void Object::set_position(Position *pos)
+void Object::Update()
 {
-	cycle->m_x = pos->x;
-	cycle->m_y = pos->y;
-}
 
-Position Object::get_position()
-{
-	Position m_pos;
-	m_pos.x = cycle->m_x;
-	m_pos.y = cycle->m_y;
-	return m_pos;
-}
-
-void Object::SetPosition( Position pos )
-{
-	cycle->m_x = pos.x;
-	cycle->m_y = pos.y;
 }
 
 Position Object::GetPosition()
 {
-	Position m_pos;
-	m_pos.x = cycle->m_x;
-	m_pos.y = cycle->m_y;
-	return m_pos;
+	return m_position;
+}
+
+Type Object::GetType() const
+{
+	return m_type;
+}
+
+void Object::SetSize(Size size)
+{
+	m_size = size;
+}
+
+Size Object::GetSize() const
+{
+	return m_size;
+}
+
+void Object::SetPosition( Position pos )
+{
+	m_position = pos;
+}
+
+bool Object::IsEnable() const
+{
+	return m_isEnable;
 }

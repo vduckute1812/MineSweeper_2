@@ -18,6 +18,17 @@
 // Map size
 #define MAP_SIZE			14000
 
+// USE RANGE
+#define PISTAL_RANGE		5000
+#define RIFLE_RANGE			6500
+#define GRENADE_RANGE		4000
+
+// BULLET SPEED
+#define	PISTAL_BULLET_SPEED	5000
+#define REFILE_BULLET_SPEED 5000
+#define	GRENADE_SPEED		1500
+
+
 
 
 #define WIDTH 14400

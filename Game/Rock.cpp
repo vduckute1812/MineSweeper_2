@@ -4,6 +4,7 @@
 
 Rock::Rock()
 {
+	m_type = ROCK;
 }
 
 
