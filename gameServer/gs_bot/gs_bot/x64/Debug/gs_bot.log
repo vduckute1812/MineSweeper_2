@@ -1,0 +1,4 @@
+﻿  bot.cpp
+d:\ai_contest_2019\ai_2019\gameserver\gs_bot\gs_bot\bot.cpp(66): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  gs_bot.vcxproj -> D:\ai_contest_2019\AI_2019\gameServer\gs_bot\..\bot.exe
+  gs_bot.vcxproj -> D:\ai_contest_2019\AI_2019\gameServer\gs_bot\..\bot.pdb (Full PDB)
